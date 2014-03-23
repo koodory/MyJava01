@@ -1,4 +1,4 @@
-package EIPcertificatepreparation;
+package EIPcertificatepreparation.progression;
 import java.util.Scanner;
 
 public class test05{
