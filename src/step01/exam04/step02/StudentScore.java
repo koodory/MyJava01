@@ -6,5 +6,16 @@ package step01.exam04.step02;
  *  - 데이터 타입 예: byte, short, int, long, float, double, boolean, char
  */
 public class StudentScore {
-
+	//  인스턴스 변수: 값을 개별로 다루어야 한다면 인스턴스 변수로 선언한다.
+	String name;
+	int kor;
+	int eng;
+	int math;
+	
+	// 생성자: 객체가 사용되기 전에 최소한의 준비 작업(초기화 시키는 작업)
+	// - name : 항목을 필수 값으로 간주한다.
+	//  => name 값이 없이 인스턴스를 생성할 수는 없다.
+	public StudentScore(String name){
+		this.name = name;
+	}
 }

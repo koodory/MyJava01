@@ -1,9 +1,16 @@
-package step01.exam04.step02;
+package step01.exam04.step04;
 
+/* 인스턴스들을 보관 : Collection
+ * - 배열
+ * - Collection 전문 클래스
+ */
 import java.util.Scanner;
 public class StudentMgtSystem { 
+	private static Scanner scanner = new Scanner(System.in);
 	
-	static Scanner scanner = new Scanner(System.in);
+	// StudentScore 주소를 저장할 레퍼런스 배열 생성
+	private static StudentScore[] scoreList = new StudentScore[3];
+	private static int scoreSize = 0;
 	
 	private static String[] promptCommand(){
 		System.out.print("명령>");
@@ -14,17 +21,20 @@ public class StudentMgtSystem {
 	
 	private static void excuteAdd(String value) {
 	  String input;
-	  String[] data = value.split(",");
 	  
-	  StudentScore score = new StudentScore(data[0]);
-	  score.kor = Integer.parseInt(data[1]);
-	  score.eng = Integer.parseInt(data[2]);
-	  score.math = Integer.parseInt(data[3]);
+	  // 로컬 변수에 담는 대신 클래스 변수에 저장한다
+	  //StudentScore score = StudentScore.fromSCV(value);
+	  if(scoreSize < 3){
+	  	scoreList[scoreSize++] = StudentScore.fromCSV(value);
+	  } else{
+	  	System.out.println("저장소가 꽉 찼습니다.");
+	  	return; // 즉시를 함수를 탈출
+	  }
 	  
-	  System.out.println("이름 : " + score.name);
-	  System.out.println("국어 : " + score.kor);
-	  System.out.println("영어 : " + score.eng);
-	  System.out.println("수학 : " + score.math);
+	  System.out.println("이름 : " + scoreList[scoreSize-1].name);
+	  System.out.println("국어 : " + scoreList[scoreSize-1].kor);
+	  System.out.println("영어 : " + scoreList[scoreSize-1].eng);
+	  System.out.println("수학 : " + scoreList[scoreSize-1].math);
 	  System.out.print("등록하시겠습니까?(y/n)");
 	  input = scanner.nextLine();
 	  if("y".equals(input.toLowerCase())){

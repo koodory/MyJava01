@@ -1,5 +1,9 @@
-package step01.exam04.step02;
+package step01.exam04.step03;
 
+/* StudentScore 클래스의 개선
+ * - 콤마(,)를 포함하는 문자열로부터 StudentScore 인스턴스를 생성하기
+ * - static 메서드(클래스 메서드)를 활용법 소개 
+ */
 import java.util.Scanner;
 public class StudentMgtSystem { 
 	
@@ -14,12 +18,8 @@ public class StudentMgtSystem {
 	
 	private static void excuteAdd(String value) {
 	  String input;
-	  String[] data = value.split(",");
-	  
-	  StudentScore score = new StudentScore(data[0]);
-	  score.kor = Integer.parseInt(data[1]);
-	  score.eng = Integer.parseInt(data[2]);
-	  score.math = Integer.parseInt(data[3]);
+
+	  StudentScore score = StudentScore.fromCSV(value);
 	  
 	  System.out.println("이름 : " + score.name);
 	  System.out.println("국어 : " + score.kor);
