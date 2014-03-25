@@ -13,28 +13,28 @@ import java.util.Scanner;
 
 public class StudentMgtSystem01 {
 	private static Scanner scanner = new Scanner(System.in);
-	
+
 	// ArrayList에 저장할 인스턴스의 타입을 지정 
 	private static ArrayList<StudentScore> scoreList 
-												= new ArrayList<StudentScore>();
-	
+	= new ArrayList<StudentScore>();
+
 	private static String[] promptCommand() {
 		System.out.print("명령>");
 		String input = scanner.nextLine(); 
-		
+
 		return input.split(" ");
 	}
-	
+
 	private static void executeAdd(final String value) {
 		String input;
-		
+
 		StudentScore score = StudentScore.fromCSV(value);
-		
+
 		System.out.println("이름:" + score.name);
 		System.out.println("국어:" + score.kor);
 		System.out.println("영어:" + score.eng);
 		System.out.println("수학:" + score.math);
-		
+
 		System.out.print("등록하시겠습니까?(y/n)");
 		input = scanner.nextLine();
 		if ("y".equals(input.toLowerCase())) {
@@ -45,7 +45,7 @@ public class StudentMgtSystem01 {
 			System.out.println("등록 취소하였습니다.");
 		}
 	}
-	
+
 	public static void executeList() {
 		// ArrayList로부터 꺼낸다.
 		// for(변수 : 배열 또는 항목의 타입이 지정된 Collection 구현체)
@@ -54,35 +54,35 @@ public class StudentMgtSystem01 {
 			System.out.println(i++ + " " + score);
 		}
 	}
-	
+
 	private static void executeDelete(int no) {
-	  if (no >= 0 && no < scoreList.size()) {
-	  	scoreList.remove(no);
-	  	System.out.println("삭제하였습니다.");
-	  } else {
-	  	System.out.println("유효하지 않은 번호입니다.");
-	  }
-  }
-	
+		if (no >= 0 && no < scoreList.size()) {
+			scoreList.remove(no);
+			System.out.println("삭제하였습니다.");
+		} else {
+			System.out.println("유효하지 않은 번호입니다.");
+		}
+	}
+
 	private static void executeUpdate(int no) {
 		if (no >= 0 && no < scoreList.size()) {
 			StudentScore score = scoreList.get(no);
 			System.out.print("이름(" + score.name + "):");
 			String input = scanner.nextLine();
 			StudentScore temp = new StudentScore(input);
-			
+
 			System.out.print("국어(" + score.kor + "):");
 			input = scanner.nextLine();
 			temp.kor = Integer.parseInt(input);
-			
+
 			System.out.print("영어(" + score.eng + "):");
 			input = scanner.nextLine();
 			temp.eng = Integer.parseInt(input);
-			
+
 			System.out.print("수학(" + score.math + "):");
 			input = scanner.nextLine();
 			temp.math = Integer.parseInt(input);
-			
+
 			System.out.print("변경하시겠습니까?(y/n)");
 			input = scanner.nextLine();
 			if ("y".equals(input.toLowerCase())) {
@@ -94,8 +94,8 @@ public class StudentMgtSystem01 {
 		} else {
 			System.out.println("유효하지 않은 번호입니다.");
 		}
-  }
-	
+	}
+
 	private static void executeSave() {
 		try {
 			FileWriter out = new FileWriter("student.data");
@@ -108,11 +108,11 @@ public class StudentMgtSystem01 {
 			ex.printStackTrace();
 		}
 	}
-	
+
 	public static void main(String[] args) {
 		do {
 			String[] values = promptCommand();
-			
+
 			if ("add".equals(values[0])) {
 				executeAdd(values[1]);
 			} else if ("list".equals(values[0])) {
@@ -128,26 +128,7 @@ public class StudentMgtSystem01 {
 			} else {
 				System.out.println("사용할 수 없는 명령어입니다.");
 			}
-			
 		} while(true);
-
 		scanner.close();
 	}
-
-
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

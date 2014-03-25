@@ -113,6 +113,7 @@ public class StudentMgtSystem {
 	
 	private static void executeLoad() {
 		try {
+		scoreList.clear(); //초기화
 			FileReader in = new FileReader("student.data");
 			Scanner s = new Scanner(in);
 			while(true) {

@@ -84,24 +84,7 @@ public class StudentMgtSystem {
 			} else {
 				System.out.println("사용할 수 없는 명령어입니다.");
 			}
-			
 		} while(true);
-
 		scanner.close();
 	}
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
