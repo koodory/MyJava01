@@ -35,8 +35,6 @@ public class TestEpisode {
 	public static void main(String[] args) {
 		PackageMemberClass out = new PackageMemberClass();
 		PackageMemberClass.MemberInnerClass in = out.new MemberInnerClass();
-		PackageMemberClass.MemberInnerClass in2 = new PackageMemberClass.MemberInnerClass();
-
 
 	}
 
