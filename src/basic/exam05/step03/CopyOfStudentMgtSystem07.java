@@ -9,23 +9,23 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.Scanner;
-import javax.swing.JOptionPane;
-/* Frame에 들어갈 화면 제작
- * 1) MenuPAnel: 메뉴 출력화면
- * 2) StudentPanel : 학생 관리화면
- * 3) ScorePanel: 점수 관리화면
- * 
+/* 각 기능 별로 Control 클래스 분리
+ * - 사용자가 입력한 데이터를 가공하여 Dao에게 전달
+ * - Dao가 리턴한 데이터를 가공하여 Boundary에게 전달
+ * - 일단, 현재는 Control이 Dao와 Boundary 역학을 겸한다. 
  * 
  */
+import java.util.Scanner;
 
-public class StudentMgtSystem extends Frame implements ActionListener{
-	public static Scanner scanner = new Scanner(System.in);
+import javax.swing.JOptionPane;
+
+public class CopyOfStudentMgtSystem07 extends Frame implements ActionListener{
+	static Scanner scanner = new Scanner(System.in);
 	Panel menuPanel = new Panel();
 	Button btnScoreMgt = new Button("점수관리");
 	Button btnStudentMgt = new Button("학생관리");
 	
-	public StudentMgtSystem(){
+	public CopyOfStudentMgtSystem07(){
 		super("학생관리시스템"); // 호출할 수퍼 클래스 생성자를 지정할 수 있음
 	  //super(); // 호출할 수퍼 클래스 생성자를 지정하지 않는다면 기본 생성자 호출
 	  //setTitle("학생관리시스텐"); //기본 생성자 호출후 setTitle()을 호출해도 됨
@@ -46,7 +46,7 @@ public class StudentMgtSystem extends Frame implements ActionListener{
 		menuPanel.add(btnStudentMgt);
 		menuPanel.add(btnScoreMgt);
 	}
-	@Override
+
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == btnStudentMgt){
 		JOptionPane.showMessageDialog(null, "학생관리");
@@ -56,7 +56,7 @@ public class StudentMgtSystem extends Frame implements ActionListener{
 	}
 
 	public static void main(String[] args) {
-		StudentMgtSystem f = new StudentMgtSystem();
+		CopyOfStudentMgtSystem07 f = new CopyOfStudentMgtSystem07();
 		f.setVisible(true);
 	}	
 }
