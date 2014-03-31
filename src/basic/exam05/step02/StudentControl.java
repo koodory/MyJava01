@@ -88,7 +88,7 @@ public class StudentControl {
 	}
 	private static void executeSave(){
 		try{
-			FileWriter out = new FileWriter("personal.dat");
+			FileWriter out = new FileWriter("student.dat");
 			for(Student student: studentList){
 				out.write(student.toString()+"\n");
 			}
@@ -101,7 +101,7 @@ public class StudentControl {
 
 	public static void executeLoad(){
 		try{
-			FileReader in = new FileReader("personal.dat");
+			FileReader in = new FileReader("student.dat");
 			Scanner scan = new Scanner(in);
 			studentList.clear();
 			while(true){

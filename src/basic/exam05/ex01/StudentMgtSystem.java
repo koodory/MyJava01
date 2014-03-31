@@ -37,6 +37,19 @@ public class StudentMgtSystem extends Frame {
 	StudentPanel studentPanel;
 	ScorePanel scorePanel;
 	
+	StateChangeListener stateChangeListener = new StateChangeListener(){	
+		@Override
+		public void stateChanged(StateChangeEvent e) {
+			CardLayout cardLayout = (CardLayout)StudentMgtSystem.this.getLayout();
+			if(e.stateName.equals("back")){
+				cardLayout.show(StudentMgtSystem.this, MENU_PANEL);
+			}else if(e.stateName.equals("studentPanel")){
+				cardLayout.show(StudentMgtSystem.this, STUDENT_PANEL );
+			}else if(e.stateName.equals("scorePanel")){
+				cardLayout.show(StudentMgtSystem.this, SCORE_PANEL) ;
+			}
+		}
+	};
 	public StudentMgtSystem() {
 		super("학생관리시스템"); 
 		setSize(400, 300);
@@ -48,9 +61,13 @@ public class StudentMgtSystem extends Frame {
 		});
 		
 		setLayout(new CardLayout()); // 메뉴화면,학생관리화면,점수관리화면 겹치게 함.		
-		menuPanel = new MenuPanel(this);
-		studentPanel = new StudentPanel(this);
-		scorePanel = new ScorePanel(this);
+		menuPanel = new MenuPanel();
+		studentPanel = new StudentPanel();
+		scorePanel = new ScorePanel();
+		
+		menuPanel.addStateChangeListener(stateChangeListener);
+		studentPanel.addStateChangeListener(stateChangeListener);
+		scorePanel.addStateChangeListener(stateChangeListener);
 		
 		// CardLayout인 경우 자식 컴포넌트를 붙일 때 
 		// 이름을 함께 주어야 한다.
@@ -61,11 +78,7 @@ public class StudentMgtSystem extends Frame {
 	}
 	
 	// 자식 패널들이 호출한다.
-	public void changePanel(String panelName) {
-		CardLayout cardLayout = (CardLayout)this.getLayout();
-		
-		cardLayout.show(this, panelName);
-	}
+
 	
 	public static void main(String[] args) {
 		StudentMgtSystem f = new StudentMgtSystem();

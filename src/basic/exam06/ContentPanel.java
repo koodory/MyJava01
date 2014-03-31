@@ -59,8 +59,6 @@ public class ContentPanel extends Panel implements ActionListener{
 			l.stateChanged(e);
 		} 
 	}
-	
-	
 }
 
 
