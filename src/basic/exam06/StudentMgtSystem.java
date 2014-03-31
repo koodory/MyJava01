@@ -59,6 +59,7 @@ public class StudentMgtSystem extends Frame {
 		
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
+				studentPanel.save();
 				System.exit(0); 		
 			}
 		});

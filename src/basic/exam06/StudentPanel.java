@@ -36,6 +36,9 @@ public class StudentPanel extends ContentPanel {
 	Button btnDelete = new Button("삭제");
 	Button btnCancel = new Button("취소");
 	
+	int selectedIndex = -1;
+	
+	
 	public StudentPanel() {
 		super("학생관리");
 		
@@ -55,6 +58,8 @@ public class StudentPanel extends ContentPanel {
 				newButtonBar.setVisible(false);
 				detailButtonBar.setVisible(true);
 				StudentPanel.this.validate(); //화면 갱신
+				
+				selectedIndex = listView.getSelectedIndex();
 			}
 		});
 		content.add(listView);
@@ -114,13 +119,26 @@ public class StudentPanel extends ContentPanel {
 		btnUpdate.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				Student s = new Student();
+				s.name = tfName.getText();
+				s.age = Integer.parseInt(tfAge.getText());
+				s.tel = tfTel.getText();
+				s.email = tfEmail.getText();
+				s.address = tfAddr.getText();
 				
+				controller.update(selectedIndex,s);
+				listView.replaceItem(s.toString(), selectedIndex);
 			}
 		});
+		
 		btnDelete.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				newButtonBar.setVisible(true);
+				detailButtonBar.setVisible(false);
+				listView.remove(selectedIndex);
+				controller.remove(selectedIndex);
+				clearForm();
 			}
 		});
 		btnCancel.addActionListener(new ActionListener() {
@@ -128,6 +146,8 @@ public class StudentPanel extends ContentPanel {
 			public void actionPerformed(ActionEvent e) {
 				newButtonBar.setVisible(true);
 				detailButtonBar.setVisible(false);
+				selectedIndex = -1;
+				clearForm();
 			}
 		});
 		detailView.add(detailButtonBar);
@@ -137,7 +157,7 @@ public class StudentPanel extends ContentPanel {
 		content.add(detailView);
 		
 		
-		controller.executeLoad();
+		controller.load();
 		displayList();
 	}
 	
@@ -165,6 +185,10 @@ public class StudentPanel extends ContentPanel {
 		Label label = new Label(title);
 		label.setPreferredSize(new Dimension(70, 30));
 		return label;
+	}
+	
+	public void save(){
+		controller.save();
 	}
 }
 
