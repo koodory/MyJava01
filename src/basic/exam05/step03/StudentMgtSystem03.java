@@ -1,6 +1,5 @@
 package basic.exam05.step03;
 
-import java.awt.BorderLayout;
 import java.awt.Button;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -8,14 +7,8 @@ import java.awt.Frame;
 import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 /* 각 기능 별로 Control 클래스 분리
  * - 사용자가 입력한 데이터를 가공하여 Dao에게 전달
  * - Dao가 리턴한 데이터를 가공하여 Boundary에게 전달

@@ -19,13 +19,13 @@ import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
-public class CopyOfStudentMgtSystem07 extends Frame implements ActionListener{
+public class StudentMgtSystem07 extends Frame implements ActionListener{
 	static Scanner scanner = new Scanner(System.in);
 	Panel menuPanel = new Panel();
 	Button btnScoreMgt = new Button("점수관리");
 	Button btnStudentMgt = new Button("학생관리");
 	
-	public CopyOfStudentMgtSystem07(){
+	public StudentMgtSystem07(){
 		super("학생관리시스템"); // 호출할 수퍼 클래스 생성자를 지정할 수 있음
 	  //super(); // 호출할 수퍼 클래스 생성자를 지정하지 않는다면 기본 생성자 호출
 	  //setTitle("학생관리시스텐"); //기본 생성자 호출후 setTitle()을 호출해도 됨
@@ -56,7 +56,7 @@ public class CopyOfStudentMgtSystem07 extends Frame implements ActionListener{
 	}
 
 	public static void main(String[] args) {
-		CopyOfStudentMgtSystem07 f = new CopyOfStudentMgtSystem07();
+		StudentMgtSystem07 f = new StudentMgtSystem07();
 		f.setVisible(true);
 	}	
 }
