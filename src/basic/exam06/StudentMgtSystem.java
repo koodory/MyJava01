@@ -60,9 +60,10 @@ public class StudentMgtSystem extends Frame {
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
 				studentPanel.save();
+				scorePanel.save();
 				System.exit(0); 		
 			}
-		});
+		});	
 		
 		setLayout(new CardLayout()); // 메뉴화면,학생관리화면,점수관리화면 겹치게 함.
 		

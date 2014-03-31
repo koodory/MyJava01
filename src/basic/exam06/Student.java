@@ -17,7 +17,6 @@ public class Student {
 		obj.email = data[3];
 		obj.address = data[4];
 		
-		
 		return obj;
 	}
 
