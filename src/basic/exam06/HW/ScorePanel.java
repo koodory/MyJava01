@@ -1,5 +1,4 @@
-package basic.exam06;
-
+package basic.exam06.HW;
 import java.awt.Button;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -14,8 +13,8 @@ import java.awt.event.ItemListener;
 
 
 @SuppressWarnings("serial")
-public class StudentPanel extends ContentPanel {
-	StudentControl controller = new StudentControl();
+public class ScorePanel extends ContentPanel {
+	StudentScoreControl controller = new StudentScoreControl();
 	
 	List listView = new List(){
 		public Dimension getPreferredSize() {
@@ -25,10 +24,9 @@ public class StudentPanel extends ContentPanel {
 	
 	Panel detailView = new Panel(new FlowLayout(FlowLayout.LEFT));
 	TextField tfName = new TextField(10);
-	TextField tfAge = new TextField(3);
-	TextField tfTel = new TextField(15);
-	TextField tfEmail = new TextField(20);
-	TextField tfAddr = new TextField(20);
+	TextField tfKor = new TextField(5);
+	TextField tfEng = new TextField(5);
+	TextField tfMath = new TextField(5);
 	Panel newButtonBar;
 	Panel detailButtonBar;
 	Button btnAdd = new Button("등록");
@@ -38,31 +36,29 @@ public class StudentPanel extends ContentPanel {
 	
 	int selectedIndex = -1;
 	
-	public StudentPanel() {
-		super("학생관리");
+	public ScorePanel() {
+		super("점수관리");
 		
 		listView.setMultipleMode(false);
 		listView.addItemListener(new ItemListener() {
 			@Override
 			public void itemStateChanged(ItemEvent e) {
-				Student s = Student.fromCSV(
+				StudentScore s = StudentScore.fromCSV(
 						listView.getItem(
 								listView.getSelectedIndex()));
 				tfName.setText(s.name);
-				tfAge.setText(Integer.toString(s.age));
-				tfTel.setText(s.tel);
-				tfEmail.setText(s.email);
-				tfAddr.setText(s.address);
+				tfKor.setText(Integer.toString(s.kor));
+				tfEng.setText(Integer.toString(s.eng));
+				tfMath.setText(Integer.toString(s.math));
 				
 				newButtonBar.setVisible(false);
 				detailButtonBar.setVisible(true);
-				StudentPanel.this.validate(); //화면 갱신
+				ScorePanel.this.validate();
 				
 				selectedIndex = listView.getSelectedIndex();
 			}
 		});
 		content.add(listView);
-		
 		detailView.setPreferredSize(new Dimension(300,400));
 		
 		Panel rowPane = new Panel(new FlowLayout(FlowLayout.LEFT));
@@ -72,23 +68,18 @@ public class StudentPanel extends ContentPanel {
 		detailView.add(rowPane);
 		
 		rowPane = createRowPane();
-		rowPane.add(createLabel("나이"));
-		rowPane.add(tfAge);
+		rowPane.add(createLabel("국어"));
+		rowPane.add(tfKor);
 		detailView.add(rowPane);
 		
 		rowPane = createRowPane();
-		rowPane.add(createLabel("전화"));
-		rowPane.add(tfTel);
+		rowPane.add(createLabel("영어"));
+		rowPane.add(tfEng);
 		detailView.add(rowPane);
 		
 		rowPane = createRowPane();
-		rowPane.add(createLabel("이메일"));
-		rowPane.add(tfEmail);
-		detailView.add(rowPane);
-		
-		rowPane = createRowPane();
-		rowPane.add(createLabel("주소"));
-		rowPane.add(tfAddr);
+		rowPane.add(createLabel("수학"));
+		rowPane.add(tfMath);
 		detailView.add(rowPane);
 		
 		newButtonBar = createRowPane();
@@ -96,12 +87,10 @@ public class StudentPanel extends ContentPanel {
 		btnAdd.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Student s = new Student();
-				s.name = tfName.getText();
-				s.age = Integer.parseInt(tfAge.getText());
-				s.tel = tfTel.getText();
-				s.email = tfEmail.getText();
-				s.address = tfAddr.getText();
+				StudentScore s = new StudentScore(tfName.getText());
+				s.kor = Integer.parseInt(tfKor.getText());
+				s.eng = Integer.parseInt(tfEng.getText());
+				s.math = Integer.parseInt(tfMath.getText());
 				
 				controller.add(s);
 				listView.add(s.toString());
@@ -111,6 +100,7 @@ public class StudentPanel extends ContentPanel {
 		detailView.add(newButtonBar);
 		
 		detailButtonBar = createRowPane();
+		detailButtonBar.setVisible(false);
 		detailButtonBar.add(btnUpdate);
 		detailButtonBar.add(btnDelete);
 		detailButtonBar.add(btnCancel);
@@ -118,18 +108,16 @@ public class StudentPanel extends ContentPanel {
 		btnUpdate.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Student s = new Student();
-				s.name = tfName.getText();
-				s.age = Integer.parseInt(tfAge.getText());
-				s.tel = tfTel.getText();
-				s.email = tfEmail.getText();
-				s.address = tfAddr.getText();
+				StudentScore s = new StudentScore(tfName.getText());
+				s.kor = Integer.parseInt(tfKor.getText());
+				s.eng = Integer.parseInt(tfEng.getText());
+				s.math = Integer.parseInt(tfMath.getText());
 				
-				controller.update(selectedIndex,s);
+				controller.update(selectedIndex, s);
 				listView.replaceItem(s.toString(), selectedIndex);
+				
 			}
 		});
-		
 		btnDelete.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -162,14 +150,13 @@ public class StudentPanel extends ContentPanel {
 	
 	private void clearForm() {
     tfName.setText("");
-    tfAge.setText("");
-    tfTel.setText("");
-    tfEmail.setText("");
-    tfAddr.setText("");
+    tfKor.setText("");
+    tfEng.setText("");
+    tfMath.setText("");
   }
 	
 	private void displayList() {
-	  for (Student student : controller.studentList) {
+	  for (StudentScore student : controller.scoreList) {
 	  	listView.add(student.toString());
 	  }
   }
@@ -186,7 +173,7 @@ public class StudentPanel extends ContentPanel {
 		return label;
 	}
 	
-	public void save(){
+	public void save() {
 		controller.save();
 	}
 }

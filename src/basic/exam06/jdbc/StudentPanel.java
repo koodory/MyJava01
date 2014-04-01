@@ -1,4 +1,4 @@
-package basic.exam06;
+package basic.exam06.jdbc;
 
 import java.awt.Button;
 import java.awt.Dimension;
