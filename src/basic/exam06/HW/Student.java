@@ -1,6 +1,5 @@
 package basic.exam06.HW;
 
-
 public class Student {
 	String 		name;
 	int 				age;
@@ -17,7 +16,6 @@ public class Student {
 		obj.tel = data[2];
 		obj.email = data[3];
 		obj.address = data[4];
-		
 		
 		return obj;
 	}

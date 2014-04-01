@@ -15,19 +15,17 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.JFormattedTextField;
+import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
 
 @SuppressWarnings("serial")
 public class LecturePanel extends ContentPanel{
 	Date sqlDate = new Date(new java.util.Date().getTime());
 	DateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");
-	String tempDate = sdFormat.format(sqlDate);
+	String curDate = sdFormat.format(sqlDate);
 	LectureControl controller = new LectureControl();
-
 
 	List listView = new List(){
 		public Dimension getPreferredSize() {
@@ -158,11 +156,16 @@ public class LecturePanel extends ContentPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Lecture l = new Lecture();
-				Lecture f = Lecture.fromCSV2(tfStartDate.getText());
-				Lecture f2 = Lecture.fromCSV2(tfEndDate.getText());
-				Lecture f3 = Lecture.fromCSV2(tempDate);
-				if(f.year <= f2.year && f.month < 13 && f2.month < 13 && f.day < 32 && f2.day < 32){
-					if(f.year >= f3.year){	
+				Lecture start = Lecture.fromCSV2(tfStartDate.getText());
+				Lecture end = Lecture.fromCSV2(tfEndDate.getText());
+				Lecture current = Lecture.fromCSV2(curDate);
+				int startNum = start.year * 10000 + start.month * 100 + start.day; 
+				int endNum = end.year * 10000 + end.month * 100 + end.day;
+				boolean invalidStart = validateDateFormat(tfStartDate.getText());
+				boolean invalidEnd = validateDateFormat(tfEndDate.getText());
+		
+				if(startNum < endNum && invalidStart == false && invalidEnd == false){
+					if(start.year >= current.year ){	
 						l.title = tfTitle.getText();
 						l.teacher = tfTeacher.getText();
 						l.startDate = tfStartDate.getText();
@@ -173,7 +176,11 @@ public class LecturePanel extends ContentPanel{
 						controller.add(l);
 						listView.add(l.toString());
 						clearForm();
+					}else{
+						JOptionPane.showMessageDialog(null,"2014년이전 입력불가!");
 					}
+				}else{
+					JOptionPane.showMessageDialog(null,"유효하지 않은 날짜입니다.");
 				}
 			}
 		});		
@@ -225,8 +232,7 @@ public class LecturePanel extends ContentPanel{
 		content.add(detailView);
 		controller.load();
 		displayList();
-	}
-
+	}	
 	private void clearForm() {
 		tfTitle.setText("");
 		tfTeacher.setText("");
@@ -234,6 +240,29 @@ public class LecturePanel extends ContentPanel{
 		tfEndDate.setText(null);
 	}
 
+	public final boolean validateDateFormat(final String date) {
+		String[] formatStrings = {"yyyy-MM-dd"};
+		boolean isInvalidFormat = false;
+		Date dateObj;
+		for (String formatString : formatStrings) {
+			try {
+				SimpleDateFormat sdf = (SimpleDateFormat) DateFormat.getDateInstance();
+				sdf.applyPattern(formatString);
+				sdf.setLenient(false);
+				dateObj = sdf.parse(date);
+				System.out.println(dateObj);
+				if (date.equals(sdf.format(dateObj))) {
+					isInvalidFormat = false;
+					break;
+				}
+			} catch (ParseException e) {
+				isInvalidFormat = true;
+			}
+		}
+		return isInvalidFormat;
+	}
+	
+	
 	private void displayList() {
 		for (Lecture lecture : controller.lectureList) {
 			listView.add(lecture.toString());

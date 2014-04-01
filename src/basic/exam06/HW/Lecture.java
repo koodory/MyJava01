@@ -29,12 +29,12 @@ public class Lecture {
 	public static Lecture fromCSV2(String value2){
 		String[] data2 = value2.split("-");
 		
-		Lecture time = new Lecture();
-		time.year = Integer.parseInt(data2[0]);
-		time.month = Integer.parseInt(data2[1]);
-		time.day = Integer.parseInt(data2[2]);
+		Lecture obj2 = new Lecture();
+		obj2.year = Integer.parseInt(data2[0]);
+		obj2.month = Integer.parseInt(data2[1]);
+		obj2.day = Integer.parseInt(data2[2]);
 		
-		return time;
+		return obj2;
 	}
 	
 	@Override

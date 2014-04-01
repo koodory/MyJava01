@@ -16,6 +16,7 @@ public class StudentMgtSystem extends Frame{/* 적절한 클래스를 상속 받
 	MenuPanel menuPanel;
 	ScorePanel scorePanel;
 	LecturePanel lecturePanel;
+	StudentPanel studentPanel;
 	
 	StateChangeListener stateChangeListener = new StateChangeListener() {
 		@Override
@@ -42,6 +43,7 @@ public class StudentMgtSystem extends Frame{/* 적절한 클래스를 상속 받
 			public void windowClosing(WindowEvent e) {
 			  scorePanel.save();
 			  lecturePanel.save();
+			  studentPanel.save();
 			  System.exit(0);
 			}
 		
@@ -51,14 +53,17 @@ public class StudentMgtSystem extends Frame{/* 적절한 클래스를 상속 받
 		menuPanel = new MenuPanel();
 		scorePanel = new ScorePanel();
 		lecturePanel = new LecturePanel();
+		studentPanel = new StudentPanel();
 		
 		lecturePanel.addStateChangeListener(stateChangeListener);
 		menuPanel.addStateChangeListener(stateChangeListener);
 		scorePanel.addStateChangeListener(stateChangeListener);
+		studentPanel.addStateChangeListener(stateChangeListener);
 		
 		add(menuPanel, MENU_PANEL);
 		add(scorePanel, SCORE_PANEL);
 		add(lecturePanel, LECTURE_PANEL);
+		add(studentPanel, STUDENT_PANEL);
 	}
 	
 	public static void main(String[] args) {

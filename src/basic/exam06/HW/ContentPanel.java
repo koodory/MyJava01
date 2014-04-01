@@ -25,7 +25,6 @@ public class ContentPanel extends Panel implements ActionListener {
 		titlebar.add(this.title);
 		titlebar.add(btnBack);
 		this.add(titlebar, BorderLayout.NORTH);
-
 		this.add(content, BorderLayout.CENTER);
 
 		btnBack.addActionListener(this);
