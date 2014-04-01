@@ -43,7 +43,7 @@ public class LecturePanel extends ContentPanel{
 	//TextField tfStartDate = new TextField(15);
 	//TextField tfEndDate = new TextField(15);
 	Choice tfClassRoom = new Choice();
-	TextField tfManager = new TextField(10);
+	Choice tfManager = new Choice();
 	Choice tfHours = new Choice();
 
 
@@ -81,7 +81,12 @@ public class LecturePanel extends ContentPanel{
 		tfHours.add("10");
 		tfHours.add("11");
 		tfHours.add("12");
-
+		
+		tfManager.add("구상현");
+		tfManager.add("노의현");
+		tfManager.add("박용범");
+		tfManager.add("이강진");
+		tfManager.add("김승범");
 		tfStartDate.setColumns(10);
 		tfEndDate.setColumns(10);
 
@@ -98,7 +103,7 @@ public class LecturePanel extends ContentPanel{
 				tfStartDate.setText(l.startDate);
 				tfEndDate.setText(l.endDate);
 				tfClassRoom.select(l.classRoom);
-				tfManager.setText(l.manager);   
+				tfManager.select(l.manager);   
 				tfHours.select(Integer.toString(l.hours));
 				newButtonBar.setVisible(false);
 				detailButtonBar.setVisible(true);
@@ -163,7 +168,7 @@ public class LecturePanel extends ContentPanel{
 						l.startDate = tfStartDate.getText();
 						l.endDate = tfEndDate.getText();
 						l.classRoom = tfClassRoom.getSelectedItem();
-						l.manager = tfManager.getText();
+						l.manager = tfManager.getSelectedItem();
 						l.hours = Integer.parseInt(tfHours.getSelectedItem());
 						controller.add(l);
 						listView.add(l.toString());
@@ -189,7 +194,7 @@ public class LecturePanel extends ContentPanel{
 				l.startDate = tfStartDate.getText();
 				l.endDate = tfEndDate.getText();
 				l.classRoom = tfClassRoom.getSelectedItem();
-				l.manager = tfManager.getText();
+				l.manager = tfManager.getSelectedItem();
 				l.hours = Integer.parseInt(tfHours.getSelectedItem());
 				controller.add(l);
 				controller.update(selectedIndex, l);
@@ -227,9 +232,6 @@ public class LecturePanel extends ContentPanel{
 		tfTeacher.setText("");
 		tfStartDate.setText(null);
 		tfEndDate.setText(null);
-		//    dateMaskForm(tfStartDate);
-		//    dateMaskForm(tfEndDate);
-		tfManager.setText("");
 	}
 
 	private void displayList() {
@@ -256,7 +258,7 @@ public class LecturePanel extends ContentPanel{
 			dateMask = new MaskFormatter("####-##-##");
 			dateMask.install(value);
 		} catch (ParseException ex) {
-			Logger.getLogger(MaskFormatter.class.getName()).log(Level.SEVERE, null, ex);
+			ex.printStackTrace();
 		}
 	}
 
