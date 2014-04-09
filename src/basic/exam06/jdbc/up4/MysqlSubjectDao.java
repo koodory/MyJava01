@@ -1,4 +1,4 @@
-package basic.exam06.jdbc.up2;
+package basic.exam06.jdbc.up4;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SubjectDao {
+public class MysqlSubjectDao implements SubjectDao {
 	public void insert(SubjectVo subject) throws Throwable {
 		Connection con = null;
 		PreparedStatement stmt = null;
@@ -155,12 +155,3 @@ public class SubjectDao {
 		}
 	}
 }
-
-
-
-
-
-
-
-
-

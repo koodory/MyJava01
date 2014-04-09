@@ -1,6 +1,5 @@
 package basic.exam06.jdbc.up2;
 
-
 /* SubjectDao 사용
  */
 public class InsertTest {
