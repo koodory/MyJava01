@@ -1,6 +1,5 @@
 package basic.exam06.jdbc.up4;
 
-import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Scanner;
 // 소스를 손대지 않고 SubjectDao 구현체 교체하기
